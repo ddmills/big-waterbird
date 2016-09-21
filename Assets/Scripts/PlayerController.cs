@@ -4,16 +4,16 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    // Use this for initialization
+    void Start () {
+    
+    }
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (!isLocalPlayer)
         {
             return;
@@ -29,7 +29,7 @@ public class PlayerController : NetworkBehaviour {
         {
             CmdFire();
         }
-	}
+    }
 
     [Command]
     void CmdFire()
