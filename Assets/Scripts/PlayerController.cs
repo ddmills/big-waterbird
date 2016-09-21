@@ -8,6 +8,9 @@ public class PlayerController : NetworkBehaviour {
 	void Start () {
 	
 	}
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,7 +24,21 @@ public class PlayerController : NetworkBehaviour {
 
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CmdFire();
+        }
 	}
+
+    [Command]
+    void CmdFire()
+    {
+        GameObject bullet = (GameObject) Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6.0f;
+        NetworkServer.Spawn(bullet);
+        Destroy(bullet, 3);
+    }
 
     public override void OnStartLocalPlayer()
     {
