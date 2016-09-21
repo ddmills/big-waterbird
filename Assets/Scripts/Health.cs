@@ -14,7 +14,7 @@ public class Health : MonoBehaviour {
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Player has died...");
+            Destroy(this.gameObject);
         }
 
         healthbar.sizeDelta = new Vector2(currentHealth * 2, healthbar.sizeDelta.y);
