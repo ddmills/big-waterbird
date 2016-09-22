@@ -4,11 +4,6 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour {
 
-    // Use this for initialization
-    void Start () {
-    
-    }
-
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
 
