@@ -19,13 +19,22 @@ public class Health : NetworkBehaviour {
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
-            Destroy(this.gameObject);
+            RpcRespawn();
+            currentHealth = maxHealth;
         }
     }
     
     void OnChangeHealth(int health)
     {
         healthbar.sizeDelta = new Vector2(health * 2, healthbar.sizeDelta.y);
+    }
+
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            transform.position = Vector3.zero;
+        }
     }
 }
