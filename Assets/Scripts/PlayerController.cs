@@ -6,6 +6,7 @@ public class PlayerController : NetworkBehaviour {
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public Transform cameraHandle;
 
     // Update is called once per frame
     void Update () {
@@ -38,5 +39,8 @@ public class PlayerController : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         GetComponent<MeshRenderer>().material.color = Color.cyan;
+
+        Camera.main.transform.SetParent(cameraHandle);
+        Camera.main.transform.localPosition = Vector3.zero;
     }
 }
