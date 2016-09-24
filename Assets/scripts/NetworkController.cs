@@ -6,10 +6,26 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(NetworkManager))]
 public class NetworkController : MonoBehaviour {
     private NetworkManager manager;
+    public bool joinOnStart;
 
     void Awake()
     {
         manager = GetComponent<NetworkManager>();
+    }
+
+    void Start()
+    {
+        if (joinOnStart)
+        {
+            if (NetworkServer.active)
+            {
+                JoinLocalHost();
+            }
+            else
+            {
+                StartLocalHost();
+            }
+        }
     }
 
     void Update()
