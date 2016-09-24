@@ -30,6 +30,13 @@ public class NetworkController : MonoBehaviour {
 
     void Update()
     {
+        if (!NetworkClient.active && !NetworkServer.active)
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                StartLocalHost();
+            }
+        }
         if (NetworkServer.active && NetworkClient.active)
         {
             if (Input.GetKeyDown(KeyCode.Q))

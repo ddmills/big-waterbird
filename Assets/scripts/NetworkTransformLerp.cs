@@ -3,13 +3,13 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class NetworkTransformLerp : NetworkBehaviour {
-
     [SyncVar] Vector3 realPosition = Vector3.zero;
     [SyncVar] Quaternion realRotation;
     private float updateInterval;
     public float lerpFactor = 0.1f;
 
-    void Update () {
+    void Update ()
+    {
         if (isLocalPlayer)
         {
             updateInterval += Time.deltaTime;
