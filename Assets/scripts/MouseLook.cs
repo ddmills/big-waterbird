@@ -52,13 +52,22 @@ public class MouseLook : MonoBehaviour
     {
         if (lockCursor)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            LockCursor();
         }
+    }
+
+    void OnDestroy()
+    {
+        UnlockCursor();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnlockCursor();
+        }
+
         rotationHorizontal += Input.GetAxis("Mouse X") * sensitivityHorizontal;
         rotationVertical += Input.GetAxis("Mouse Y") * sensitivityVertical;
         rotationVertical = ClampAngle(rotationVertical, minimumY, maximumY);
@@ -74,6 +83,18 @@ public class MouseLook : MonoBehaviour
             targetVertical.localRotation = Quaternion.AngleAxis(rotationVertical, Vector3.right * -1);
             targetVertical.localRotation *= Quaternion.Euler(targetVerticalDirection);
         }
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public static float ClampAngle(float angle, float min, float max)
