@@ -20,7 +20,7 @@ public class PlayerController : NetworkBehaviour {
 
         transform.Translate(x, 0, z);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             CmdFire();
         }
