@@ -45,6 +45,8 @@ public class MouseLook : MonoBehaviour
     public float minimumY = -60F;
     public float maximumY = 60F;
 
+    public float lerpFactor = 0.1f;
+
     float rotationHorizontal = 0F;
     float rotationVertical = 0F;
 
@@ -74,14 +76,14 @@ public class MouseLook : MonoBehaviour
 
         if (targetHorizontal)
         {
-            targetHorizontal.localRotation = Quaternion.AngleAxis(rotationHorizontal, targetHorizontal.up);
-            targetHorizontal.localRotation *= Quaternion.Euler(targetHorizontalDirection);
+            Quaternion rotation = Quaternion.AngleAxis(rotationHorizontal, targetHorizontal.up) * Quaternion.Euler(targetHorizontalDirection);
+            targetHorizontal.localRotation = Quaternion.Lerp(targetHorizontal.localRotation, rotation, lerpFactor);
         }
 
         if (targetVertical)
         {
-            targetVertical.localRotation = Quaternion.AngleAxis(rotationVertical, Vector3.right * -1);
-            targetVertical.localRotation *= Quaternion.Euler(targetVerticalDirection);
+            Quaternion rotation = Quaternion.AngleAxis(rotationVertical, Vector3.right * -1) * Quaternion.Euler(targetVerticalDirection);
+            targetVertical.localRotation = Quaternion.Lerp(targetVertical.localRotation, rotation, lerpFactor);
         }
     }
 

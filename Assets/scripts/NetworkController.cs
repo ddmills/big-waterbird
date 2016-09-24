@@ -30,7 +30,7 @@ public class NetworkController : MonoBehaviour {
 
     void Update()
     {
-        if (NetworkServer.active || NetworkClient.active)
+        if (NetworkServer.active && NetworkClient.active)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
