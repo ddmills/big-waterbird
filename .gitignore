@@ -37,3 +37,6 @@ sysinfo.txt
 # dev junk 
 DevScene.unity
 DevScene.unity.meta
+
+*.blend1
+*.blend2
