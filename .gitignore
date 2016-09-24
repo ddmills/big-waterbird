@@ -33,3 +33,7 @@ sysinfo.txt
 # ide junk
 *.sublime-project
 *.sublime-workspace
+
+# dev junk 
+DevScene.unity
+DevScene.unity.meta
