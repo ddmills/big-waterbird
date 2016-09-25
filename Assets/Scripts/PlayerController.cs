@@ -7,7 +7,9 @@ public class PlayerController : NetworkBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public Transform cameraHandle;
+    public float moveSpeed = 5;
     public float jumpforce = 20;
+
     // Update is called once per frame
     void Update () {
         if (!isLocalPlayer)
@@ -15,18 +17,22 @@ public class PlayerController : NetworkBehaviour {
             return;
         }
 
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f;
+        float x = Input.GetAxis("Horizontal") * moveSpeed;
+        float z = Input.GetAxis("Vertical") * moveSpeed;
 
-        transform.Translate(x, 0, z);
+        Vector3 speed = transform.rotation * new Vector3(x, 0, z);
+
+        //transform.Translate(x, 0, z);
+
+        CharacterController cc = GetComponent<CharacterController>();
+
+        cc.SimpleMove(speed);
 
         if (Input.GetMouseButtonDown(0))
         {
             CmdFire();
         }
-        if (Input.GetKeyDown("space")){
-            GetComponent<Rigidbody>().velocity = new Vector3(0, jumpforce, 0);
-        }
+
     }
 
     [Command]
