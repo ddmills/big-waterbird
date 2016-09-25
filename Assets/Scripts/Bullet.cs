@@ -2,17 +2,22 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-    void OnCollisionEnter(Collision collision)
-    {
-        GameObject hit = collision.gameObject;
+    void Update()
+    {   
+        RaycastHit hit;
+        
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-        Health health = hit.GetComponent<Health>();
-
-        if (health != null)
+        if (Physics.Raycast(transform.position, fwd, out hit, 3.0f)) 
         {
-            health.TakeDamage(10);
+            this.transform.GetChild(0).transform.position = hit.point;
+            this.transform.GetChild(0).parent = hit.collider.gameObject.transform;
+            Health health = hit.collider.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(10);
+            }
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 }

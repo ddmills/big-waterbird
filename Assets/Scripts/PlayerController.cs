@@ -62,9 +62,9 @@ public class PlayerController : NetworkBehaviour {
     void CmdFire()
     {
         GameObject bullet = (GameObject) Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 10.0f;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 30.0f;
         NetworkServer.Spawn(bullet);
-        Destroy(bullet, 3);
+        Destroy(bullet, 6);
     }
 
     public override void OnStartLocalPlayer()
