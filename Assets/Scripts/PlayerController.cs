@@ -55,7 +55,7 @@ public class PlayerController : NetworkBehaviour {
             CmdFire();
         }
 
-        GetComponentInChildren<Animator>().SetFloat("speed", inputZ);
+        GetComponentInChildren<Animator>().SetFloat("speed", Mathf.Abs(inputZ));
         print(inputZ);
     }
 
