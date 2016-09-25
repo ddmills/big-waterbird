@@ -4,9 +4,9 @@ using System.Collections;
 public class NetworkMenuController : MonoBehaviour {
     private NetworkController networkController;
 
-    void Awake()
+    void Start()
     {
-        networkController = GameObject.Find("NetworkManager").GetComponent<NetworkController>();
+        networkController = GameManager.instance.GetComponent<NetworkController>();
     }
     
     public void OnClickHost()
