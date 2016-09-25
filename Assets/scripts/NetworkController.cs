@@ -46,21 +46,26 @@ public class NetworkController : MonoBehaviour {
         }
     }
 
-    public void StartLocalHost()
+    public void StartLocalHost(string address = "127.0.0.1", int port = 7777)
     {
-        Debug.Log("Start local host!");
+        Debug.Log("Hosting " + address + ":" + port);
+        manager.networkAddress = address;
+        manager.networkPort = port;
         manager.StartHost();
+        manager.networkAddress = address;
+        manager.networkPort = port;
     }
 
-    public void JoinLocalHost()
+    public void JoinLocalHost(string address = "127.0.0.1", int port = 7777)
     {
-        Debug.Log("Join local host!");
+        Debug.Log("Joining " + address + ":" + port);
+        manager.networkAddress = address;
+        manager.networkPort = port;
         manager.StartClient();
     }
 
     public void LeaveLocalHost()
     {
-        Debug.Log("Leave local host!");
         manager.StopHost();
     }
 }
