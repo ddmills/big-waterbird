@@ -28,9 +28,7 @@ public class PlayerController : NetworkBehaviour {
 
         float inputX = Input.GetAxis("Horizontal") * moveSpeed;
         float inputZ = Input.GetAxis("Vertical") * moveSpeed;
-
         float modifier = moveSpeed;
-
 
         verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
@@ -56,6 +54,9 @@ public class PlayerController : NetworkBehaviour {
         {
             CmdFire();
         }
+
+        GetComponentInChildren<Animator>().SetFloat("speed", inputZ);
+        print(inputZ);
     }
 
     [Command]
@@ -70,14 +71,9 @@ public class PlayerController : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         characterController = GetComponent<CharacterController>();
-
-        GetComponent<MeshRenderer>().material.color = Color.cyan;
-
         Camera.main.transform.SetParent(cameraHandle);
         Camera.main.transform.localPosition = Vector3.zero;
-
         MouseLook mouseLook = Camera.main.GetComponent<MouseLook>();
-
         mouseLook.TargetHorizontal = transform;
         mouseLook.TargetVertical = cameraHandle.transform;
     }
