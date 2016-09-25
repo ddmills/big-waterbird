@@ -7,7 +7,7 @@ public class PlayerController : NetworkBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public Transform cameraHandle;
-
+    public float jumpforce = 20;
     // Update is called once per frame
     void Update () {
         if (!isLocalPlayer)
@@ -23,6 +23,9 @@ public class PlayerController : NetworkBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             CmdFire();
+        }
+        if (Input.GetKeyDown("space")){
+            GetComponent<Rigidbody>().velocity = new Vector3(0, jumpforce, 0);
         }
     }
 
