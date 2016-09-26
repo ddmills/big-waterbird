@@ -8,6 +8,7 @@ public class PlayerController : NetworkBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public Transform cameraHandle;
+    public GameObject HUD;
 
     public float moveSpeed = 8.0f;
     public float jumpForce = 7.0f;
@@ -70,11 +71,14 @@ public class PlayerController : NetworkBehaviour {
 
     public override void OnStartLocalPlayer()
     {
+        Debug.Log("LOCAL PLAYER START");
         characterController = GetComponent<CharacterController>();
         Camera.main.transform.SetParent(cameraHandle);
         Camera.main.transform.localPosition = Vector3.zero;
         MouseLook mouseLook = Camera.main.GetComponent<MouseLook>();
         mouseLook.TargetHorizontal = transform;
         mouseLook.TargetVertical = cameraHandle.transform;
+        GameManager.instance.localPlayer = gameObject;
+        Instantiate(HUD);
     }
 }

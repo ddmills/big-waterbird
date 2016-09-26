@@ -7,7 +7,7 @@ public class Health : NetworkBehaviour {
 
     public const int maxHealth = 100;
     [SyncVar (hook = "OnChangeHealth")] public int currentHealth = maxHealth;
-    public RectTransform healthbar;
+    public RectTransform healthBar;
     public bool destroyOnDeath;
     private NetworkStartPosition[] spawnPoints;
 
@@ -43,7 +43,11 @@ public class Health : NetworkBehaviour {
     
     void OnChangeHealth(int health)
     {
-        healthbar.sizeDelta = new Vector2(health * 2, healthbar.sizeDelta.y);
+        healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
+        if (!isServer)
+        {
+            currentHealth = health;
+        }
     }
 
     [ClientRpc]

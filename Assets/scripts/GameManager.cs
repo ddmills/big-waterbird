@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     protected NetworkManager networkManager;
+    public GameObject localPlayer;
 
     protected GameManager()
     {
@@ -12,7 +13,6 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-        Debug.Log("awake game manager");
         if (instance == null)
         {
             instance = this;
