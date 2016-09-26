@@ -10,13 +10,15 @@ public class Bullet : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, fwd, out hit, 3.0f)) 
         {
-            this.transform.GetChild(0).transform.position = hit.point;
-            this.transform.GetChild(0).parent = hit.collider.gameObject.transform;
             Health health = hit.collider.GetComponent<Health>();
             if (health != null)
             {
                 health.TakeDamage(10);
+                Destroy(this.transform.GetChild(0).GetChild(0).gameObject);
             }
+            Destroy(this.transform.GetChild(0).gameObject, 6);
+            this.transform.GetChild(0).transform.position = hit.point;
+            this.transform.GetChild(0).parent = hit.collider.gameObject.transform;
             Destroy(gameObject);
         }
     }
