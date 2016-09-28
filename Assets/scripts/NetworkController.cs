@@ -54,6 +54,7 @@ public class NetworkController : MonoBehaviour {
         manager.StartHost();
         manager.networkAddress = address;
         manager.networkPort = port;
+        GameManager.hosting = true;
     }
 
     public void JoinLocalHost(string address = "127.0.0.1", int port = 7777)
@@ -67,6 +68,7 @@ public class NetworkController : MonoBehaviour {
     public void LeaveLocalHost()
     {
         manager.StopHost();
+        GameManager.hosting = false;
     }
 }
 #endif //ENABLE_UNET

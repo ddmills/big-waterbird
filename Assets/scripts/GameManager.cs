@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     protected NetworkManager networkManager;
     public GameObject localPlayer;
 
+    public static bool hosting = false;
+
     protected GameManager()
     {
     }

@@ -10,7 +10,7 @@ public class NetworkTransformLerp : NetworkBehaviour {
 
     void Update ()
     {
-        if (isLocalPlayer)
+        if (GameManager.hosting)
         {
             updateInterval += Time.deltaTime;
 

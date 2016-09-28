@@ -11,9 +11,9 @@ public class Flier : MonoBehaviour {
     }
     void Update()
     {   
-        if (target){
-            transform.LookAt(target.transform);
-        } else {
+        if (target && Random.value > 0.02){
+            transform.LookAt(target.transform);}
+        else {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             target = players[Random.Range (0, players.Length)];
         }
