@@ -9,6 +9,7 @@ public class PlayerController : NetworkBehaviour {
     public Transform bulletSpawn;
     public Transform cameraHandle;
     public GameObject HUD;
+    public Inventory inventory;
 
     public float moveSpeed = 8.0f;
     public float jumpForce = 7.0f;
@@ -55,6 +56,11 @@ public class PlayerController : NetworkBehaviour {
         {
             CmdFire();
         }
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            CmdGrabLoot();
+        }
 
         GetComponentInChildren<Animator>().SetFloat("speed", Mathf.Abs(inputZ));
 
@@ -69,9 +75,24 @@ public class PlayerController : NetworkBehaviour {
         Destroy(bullet, 6);
     }
 
+    [Command]
+    void CmdGrabLoot()
+    {
+        Transform camera = Camera.main.transform;
+        RaycastHit hit;
+        
+        if (Physics.Raycast(camera.position, camera.forward, out hit, 200))
+        {
+            InventoryItem item = hit.collider.GetComponent<InventoryItem>();
+            if (item != null)
+            {
+                inventory.AddItem(item);
+            }
+        }
+    }
+
     public override void OnStartLocalPlayer()
     {
-        Debug.Log("LOCAL PLAYER START");
         characterController = GetComponent<CharacterController>();
         Camera.main.transform.SetParent(cameraHandle);
         Camera.main.transform.localPosition = Vector3.zero;
