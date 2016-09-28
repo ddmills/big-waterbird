@@ -16,6 +16,8 @@ public class PlayerController : NetworkBehaviour {
     public float airModifier = 0.4f;
     public float terminalVerticalVelocity = -10f;
 
+    private float cooldown = 0f;
+
     Vector3 previousDeltas = Vector3.zero;
 
     float verticalVelocity;
@@ -52,9 +54,14 @@ public class PlayerController : NetworkBehaviour {
 
         characterController.Move(deltas * Time.deltaTime);
         
-        if (Input.GetMouseButtonDown(0))
+        cooldown -= Time.deltaTime;
+        if (Input.GetMouseButton(0))
         {
-            CmdFire();
+            if (cooldown < 0)
+            {
+                cooldown = 0.2f;
+                CmdFire();
+            }
         }
         
         if (Input.GetKeyDown(KeyCode.E))
