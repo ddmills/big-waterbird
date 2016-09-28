@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour {
 
-    public const int maxHealth = 100;
-    [SyncVar (hook = "OnChangeHealth")] public int currentHealth = maxHealth;
+    public const float maxHealth = 100f;
+    [SyncVar (hook = "OnChangeHealth")] public float currentHealth = maxHealth;
     public RectTransform healthBar;
     public bool destroyOnDeath;
     private NetworkStartPosition[] spawnPoints;
@@ -19,7 +19,7 @@ public class Health : NetworkBehaviour {
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (!isServer)
         {
@@ -27,7 +27,7 @@ public class Health : NetworkBehaviour {
         }
 
         currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
         {
             if (destroyOnDeath)
             {
@@ -41,7 +41,7 @@ public class Health : NetworkBehaviour {
         }
     }
     
-    void OnChangeHealth(int health)
+    void OnChangeHealth(float health)
     {
         healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
         if (!isServer)
