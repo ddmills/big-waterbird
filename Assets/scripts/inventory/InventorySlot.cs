@@ -26,9 +26,14 @@ public class InventorySlot : MonoBehaviour {
         text.text = "" + items.Count;
     }
 
+    public bool CanAddItem(InventoryItem item)
+    {
+        return IsEmpty() || (items[0].stackable && items[0].Equals(item));
+    }
+
     public bool SetOrAdd(InventoryItem item)
     {
-        if (IsEmpty() || items[0].Equals(item))
+        if (CanAddItem(item))
         {
             AddItem(item);
             return true;
