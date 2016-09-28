@@ -6,6 +6,8 @@ public class Inventory : MonoBehaviour {
     public int inventorySize;
     public GameObject inventorySlotPanel;
     public List<InventorySlot> slots = new List<InventorySlot>();
+    public bool visible = false;
+    private CanvasGroup canvasGroup;
 
     void Start()
     {
@@ -16,6 +18,9 @@ public class Inventory : MonoBehaviour {
             slots.Add(slotPanel.GetComponent<InventorySlot>());
             slotPanel.transform.SetParent(transform);
         }
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        Hide();
     }
 
     public bool AddItem(InventoryItem item)
@@ -28,5 +33,31 @@ public class Inventory : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    public void Hide()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        visible = false;
+    }
+
+    public void Show()
+    {
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        visible = true;
+    }
+
+    public void ToggleVisible()
+    {
+        if (visible)
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
     }
 }

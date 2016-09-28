@@ -81,7 +81,7 @@ public class PlayerController : NetworkBehaviour {
         Transform camera = Camera.main.transform;
         RaycastHit hit;
         
-        if (Physics.Raycast(camera.position, camera.forward, out hit, 200))
+        if (Physics.Raycast(camera.position, camera.forward, out hit, 3))
         {
             InventoryItem item = hit.collider.GetComponent<InventoryItem>();
             if (item != null)
