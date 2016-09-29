@@ -23,11 +23,11 @@ public class Inventory : MonoBehaviour {
         Hide();
     }
 
-    public bool AddItem(InventoryItem item)
+    public bool AddItem(Loot loot)
     {
         for (int i = 0; i < inventorySize; i++)
         {
-            if (slots[i].SetOrAdd(item))
+            if (slots[i].SetOrAdd(loot))
             {
                 return true;
             }

@@ -90,10 +90,13 @@ public class PlayerController : NetworkBehaviour {
         
         if (Physics.Raycast(camera.position, camera.forward, out hit, 3))
         {
-            InventoryItem item = hit.collider.GetComponent<InventoryItem>();
-            if (item != null)
+            Lootable lootable = hit.collider.GetComponent<Lootable>();
+            if (lootable != null)
             {
-                inventory.AddItem(item);
+                if (inventory.AddItem(lootable.loot))
+                {
+                    Destroy(lootable.gameObject);
+                }
             }
         }
     }
