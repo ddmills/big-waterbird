@@ -5,8 +5,14 @@ using UnityEngine.Networking;
 public class NetworkTransformLerp : NetworkBehaviour {
     [SyncVar] Vector3 realPosition = Vector3.zero;
     [SyncVar] Quaternion realRotation;
-    private float updateInterval;
+    private float updateInterval = 1f;
     public float lerpFactor = 0.1f;
+
+    void Start (){
+        if (GameManager.hosting){
+            CmdSync(transform.position, transform.rotation);
+        }
+    }
 
     void Update ()
     {
