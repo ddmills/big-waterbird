@@ -65,7 +65,7 @@ public class PlayerController : NetworkBehaviour {
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            CmdGrabLoot();
+            PickUpLoot();
         }
 
         GetComponentInChildren<Animator>().SetFloat("speed", Mathf.Abs(inputZ));
@@ -81,8 +81,7 @@ public class PlayerController : NetworkBehaviour {
         Destroy(bullet, 6);
     }
 
-    [Command]
-    void CmdGrabLoot()
+    void PickUpLoot()
     {
         Transform camera = Camera.main.transform;
         RaycastHit hit;
@@ -94,10 +93,16 @@ public class PlayerController : NetworkBehaviour {
             {
                 if (inventory.AddItem(lootable.loot))
                 {
-                    NetworkServer.Destroy(lootable.gameObject);
+                    CmdDestroyLoot(lootable.gameObject);
                 }
             }
         }
+    }
+
+    [Command]
+    void CmdDestroyLoot(GameObject loot)
+    {
+        NetworkServer.Destroy(loot);
     }
 
     public override void OnStartLocalPlayer()
