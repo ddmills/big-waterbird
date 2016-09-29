@@ -4,7 +4,6 @@ using UnityEngine.Networking;
 
 [RequireComponent (typeof (CharacterController))]
 public class PlayerController : NetworkBehaviour {
-
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public Transform cameraHandle;
@@ -87,15 +86,15 @@ public class PlayerController : NetworkBehaviour {
     {
         Transform camera = Camera.main.transform;
         RaycastHit hit;
-        
-        if (Physics.Raycast(camera.position, camera.forward, out hit, 3))
+
+        if (Physics.Raycast(camera.position, camera.forward, out hit, 4))
         {
             Lootable lootable = hit.collider.GetComponent<Lootable>();
             if (lootable != null)
             {
                 if (inventory.AddItem(lootable.loot))
                 {
-                    Destroy(lootable.gameObject);
+                    NetworkServer.Destroy(lootable.gameObject);
                 }
             }
         }
