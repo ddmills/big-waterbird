@@ -40,6 +40,7 @@ public class Inventory : MonoBehaviour {
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         visible = false;
+        MouseLook.LockCursor();
     }
 
     public void Show()
@@ -47,6 +48,7 @@ public class Inventory : MonoBehaviour {
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         visible = true;
+        MouseLook.UnlockCursor();
     }
 
     public void ToggleVisible()
