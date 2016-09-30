@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
 
-public class DrinkHealthPotionBehavior : LootBehavior
+public class DropBehavior : LootBehavior
 {
     public override string verb
     {
         get
         {
-            return "Drink";
+            return "Drop";
         }
     }
 
@@ -15,12 +15,12 @@ public class DrinkHealthPotionBehavior : LootBehavior
     {
         get
         {
-            return "Drink up soldier";
+            return "Littering is bad";
         }
     }
 
     public override void Perform()
     {
-        Debug.Log("Drink this thing");
+        Debug.Log("Drop it like it's hot");
     }
 }

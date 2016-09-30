@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
 
-[System.Serializable]
-public abstract class LootBehavior
+
+public abstract class LootBehavior : MonoBehaviour
 {
     public abstract string verb { get; }
     public abstract string description { get; }
