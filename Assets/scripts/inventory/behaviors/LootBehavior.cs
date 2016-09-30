@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-abstract class LootBehavior
+[System.Serializable]
+public abstract class LootBehavior
 {
-    public string verb;
-    public string description;
+    public abstract string verb { get; }
+    public abstract string description { get; }
 
     abstract public void Perform();
 }

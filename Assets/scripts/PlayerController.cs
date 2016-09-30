@@ -12,12 +12,9 @@ public class PlayerController : NetworkBehaviour {
 
     public float moveSpeed = 8.0f;
     public float jumpForce = 7.0f;
-    public float airModifier = 0.4f;
     public float terminalVerticalVelocity = -10f;
 
     private float cooldown = 0f;
-
-    Vector3 previousDeltas = Vector3.zero;
 
     float verticalVelocity;
 
@@ -31,7 +28,6 @@ public class PlayerController : NetworkBehaviour {
 
         float inputX = Input.GetAxis("Horizontal") * moveSpeed;
         float inputZ = Input.GetAxis("Vertical") * moveSpeed;
-        float modifier = moveSpeed;
 
         verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
@@ -49,7 +45,6 @@ public class PlayerController : NetworkBehaviour {
 
         Vector3 deltas = new Vector3(inputX, verticalVelocity, inputZ);
         deltas = transform.rotation * deltas;
-        previousDeltas = deltas;
 
         characterController.Move(deltas * Time.deltaTime);
         
