@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class Bullet : NetworkBehaviour {
     [SyncVar]
     public Quaternion direction;
+    public GameObject bloodFX;
 
     void Start(){
         this.transform.rotation = direction;
@@ -22,6 +23,10 @@ public class Bullet : NetworkBehaviour {
                 {
                     health.TakeDamage(10);
                     Destroy(this.transform.GetChild(0).GetChild(0).gameObject);
+                    //fx
+                    GameObject blood = (GameObject)Instantiate(bloodFX, hit.point, Quaternion.identity);
+                    NetworkServer.Spawn(blood);
+                    Destroy(blood, 1.2f);
                 }
                 Destroy(this.transform.GetChild(0).gameObject, 6);
                 this.transform.GetChild(0).transform.position = hit.point;
