@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour {
+public class InventorySlot : MonoBehaviour, IPointerClickHandler
+{
     private List<Loot> items = new List<Loot>();
     private Image image;
     private Text text;
@@ -38,7 +39,13 @@ public class InventorySlot : MonoBehaviour {
             AddItem(item);
             return true;
         }
-
+        
         return false;
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("on mouse down");
+    }
+
 }
