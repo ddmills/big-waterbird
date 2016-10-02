@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class InventoryTooltip : MonoBehaviour {
+public class InventoryTooltip : MonoBehaviour, IPointerExitHandler
+{
     private Loot item;
     private Text title;
     private CanvasGroup canvasGroup;
@@ -21,11 +23,18 @@ public class InventoryTooltip : MonoBehaviour {
         title.text = item.title;
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 
     public void Deactivate()
     {
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Deactivate();
     }
 }

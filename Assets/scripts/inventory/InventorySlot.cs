@@ -49,6 +49,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     {
         if (!IsEmpty())
         {
+            tooltip.transform.position = transform.position;
             tooltip.Activate(items[0]);
         }
     }
