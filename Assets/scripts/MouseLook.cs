@@ -4,8 +4,6 @@ using System.Collections;
 [AddComponentMenu("Camera-Control/Mouse Look")]
 public class MouseLook : MonoBehaviour
 {
-    public bool lockCursor = false;
-
     private Transform targetHorizontal;
     private Transform targetVertical;
     private Vector2 targetHorizontalDirection;
@@ -52,10 +50,7 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
-        if (lockCursor)
-        {
-            LockCursor();
-        }
+        LockCursor();
     }
 
     void OnDestroy()
@@ -68,6 +63,11 @@ public class MouseLook : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UnlockCursor();
+        }
+
+        if (Cursor.lockState == CursorLockMode.None)
+        {
+            return;
         }
 
         rotationHorizontal += Input.GetAxis("Mouse X") * sensitivityHorizontal;
