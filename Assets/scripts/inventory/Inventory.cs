@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour {
             slotPanel.transform.SetParent(transform);
         }
 
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = GetComponentInParent<CanvasGroup>();//GetComponent<CanvasGroup>();
         Hide();
     }
 
@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour {
     {
         for (int i = 0; i < inventorySize; i++)
         {
-            if (slots[i].SetOrAdd(loot))
+            if (slots[i].SetOrAdd(loot))    
             {
                 return true;
             }

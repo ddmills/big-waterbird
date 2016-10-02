@@ -8,11 +8,13 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     private List<Loot> items = new List<Loot>();
     private Image image;
     private Text text;
+    private InventoryTooltip tooltip;
 
     void Start()
     {
         image = transform.FindChild("Image").GetComponent<Image>();
         text = transform.FindChild("Text").GetComponent<Text>();
+        tooltip = GameObject.Find("InventoryTooltip").GetComponent<InventoryTooltip>();
     }
 
     public bool IsEmpty()
@@ -42,10 +44,13 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         
         return false;
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("on mouse down");
+        if (!IsEmpty())
+        {
+            tooltip.Activate(items[0]);
+        }
     }
 
 }
