@@ -21,6 +21,8 @@ public class DrinkHealthPotionBehavior : LootBehavior
 
     public override void Perform()
     {
-        Debug.Log("Drink this thing");
+        Health health = GameManager.instance.localPlayer.GetComponent<Health>();
+        health.Heal(50);
+        loot.Consume();
     }
 }

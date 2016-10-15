@@ -34,6 +34,9 @@ sysinfo.txt
 *.sublime-project
 *.sublime-workspace
 
+.vs
+.vscode
+
 # dev junk 
 DevScene.unity
 DevScene.unity.meta

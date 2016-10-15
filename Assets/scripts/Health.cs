@@ -19,6 +19,20 @@ public class Health : NetworkBehaviour {
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (!isServer) // TODO ??
+        {
+            return;
+        }
+
+        currentHealth += amount;
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
     public void TakeDamage(float amount)
     {
         if (!isServer)

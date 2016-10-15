@@ -21,15 +21,14 @@ public class InventoryTooltip : MonoBehaviour, IPointerExitHandler
     public void Activate(Loot item)
     {
         this.item = item;
-        Debug.Log(item.title);
         title.text = item.title;
-        AddBehaviors();
+        AddBehaviorButtons();
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
 
-    private void AddBehaviors()
+    private void AddBehaviorButtons()
     {
         foreach (GameObject button in behaviorButtons)
         {
@@ -38,8 +37,10 @@ public class InventoryTooltip : MonoBehaviour, IPointerExitHandler
 
         foreach (LootBehavior behavior in item.behaviors)
         {
+            behavior.loot = item;
             GameObject behaviorButton = Instantiate(behaviorButtonPrefab);
             behaviorButton.GetComponentInChildren<Text>().text = behavior.verb;
+            behaviorButton.GetComponent<Button>().onClick.AddListener(Deactivate);
             behaviorButton.GetComponent<Button>().onClick.AddListener(behavior.Perform);
             behaviorButton.transform.SetParent(transform);
             behaviorButtons.Add(behaviorButton);

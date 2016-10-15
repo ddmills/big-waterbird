@@ -47,7 +47,7 @@ public class PlayerController : NetworkBehaviour {
         deltas = transform.rotation * deltas;
 
         characterController.Move(deltas * Time.deltaTime);
-        
+
         cooldown -= Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
@@ -57,7 +57,7 @@ public class PlayerController : NetworkBehaviour {
                 CmdFire();
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             PickUpLoot();

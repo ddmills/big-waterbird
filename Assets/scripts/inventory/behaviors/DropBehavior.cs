@@ -21,6 +21,6 @@ public class DropBehavior : LootBehavior
 
     public override void Perform()
     {
-        Debug.Log("Drop it like it's hot");
+        loot.Drop();
     }
 }

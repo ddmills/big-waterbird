@@ -24,9 +24,27 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     public void AddItem(Loot item)
     {
-        this.items.Add(item);
+        items.Add(item);
         image.sprite = item.sprite;
         text.text = "" + items.Count;
+        item.AddToInventorySlot(this);
+    }
+
+    public void RemoveItem(Loot item)
+    {
+        items.Remove(item);
+
+        Debug.Log("REMOVE" + item.title);
+
+        if (IsEmpty())
+        {
+            image.sprite = null;
+            text.text = "";
+        }
+        else
+        {
+            text.text = "" + items.Count;
+        }
     }
 
     public bool CanAddItem(Loot item)
@@ -41,17 +59,18 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             AddItem(item);
             return true;
         }
-        
+
         return false;
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!IsEmpty())
         {
+            Loot item = items[items.Count - 1];
+            item.AddToInventorySlot(this);
             tooltip.transform.position = transform.position;
-            tooltip.Activate(items[0]);
+            tooltip.Activate(item);
         }
     }
-
 }

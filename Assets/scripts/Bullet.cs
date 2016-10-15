@@ -11,6 +11,7 @@ public class Bullet : NetworkBehaviour {
         this.transform.rotation = direction;
         this.GetComponent<Rigidbody>().velocity = this.transform.forward * 30.0f;
     }
+
     void Update()
     {   
         if (GameManager.hosting){

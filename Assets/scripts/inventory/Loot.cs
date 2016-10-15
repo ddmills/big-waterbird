@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -12,4 +12,32 @@ public class Loot : ScriptableObject {
     public bool stackable = true;
     public Sprite sprite;
     public GameObject gameObject;
+    private InventorySlot slot;
+
+    public void AddToInventorySlot(InventorySlot slot)
+    {
+        this.slot = slot;
+    }
+
+    public void ResetBehaviors()
+    {
+        foreach (LootBehavior behavior in behaviors)
+        {
+            behavior.loot = this;
+        }
+    }
+
+    public void Consume()
+    {
+        slot.RemoveItem(this);
+    }
+
+    public GameObject Drop()
+    {
+        Transform bulletSpawn = GameManager.instance.localPlayer.GetComponent<PlayerController>().bulletSpawn;
+        GameObject instance = (GameObject) Instantiate(gameObject, bulletSpawn.position, bulletSpawn.rotation);
+        slot.RemoveItem(this);
+        NetworkServer.Spawn(instance);
+        return instance;
+    }
 }
